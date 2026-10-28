@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Ana Paula and Duncan are getting married in Cuenca, Ecuador, on August 14, 2027. Save the date and let us know if you can come.">
+<title>Ana Paula &amp; Duncan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Manrope:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: photo cover, a framed beige card overlapping it, then full-width sage and beige bands for the note and the reply form */
+:root{
+  --linen:#ffffff; --card:#f7f1e6; --ink:#2f3326; --muted:#6c6e5c;
+  --olive:#5f6b3a; --sage:#9fae8a; --sage-tint:#e2e8d8; --beige:#ece2cf; --burgundy:#7a2335; --burgundy-dark:#5e1a29;
+  --accent:var(--olive); --soft:var(--sage); --line:#dcd1bc; --tint:var(--beige);
+  --shadow:0 1px 2px rgba(60,58,45,.06),0 12px 32px -12px rgba(60,58,45,.18);
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  color-scheme:light;
+  --on-photo:#fbfaf6;
+  --photo:url(photo.jpg);
+  --body:"Manrope","Avenir Next","Segoe UI",system-ui,sans-serif;
+}
+
+*{box-sizing:border-box}
+body{background:var(--linen);color:var(--ink);font:300 17px/1.7 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:500;text-wrap:balance;margin:0}
+.wrap{max-width:720px;margin:0 auto;padding-block:32px 64px;display:grid;gap:0}
+.band{position:relative;padding-block:72px;background:var(--band);box-shadow:0 0 0 100vmax var(--band);clip-path:inset(0 -100vmax)}
+.band.sage{--band:var(--sage-tint)}
+.band.with-art{isolation:isolate;overflow:hidden}
+.band.with-art > *{position:relative}
+.band .bg-cath{position:absolute;z-index:-1;left:50%;bottom:0;transform:translateX(-50%);height:calc(100% - 18px);width:auto;max-width:none;opacity:.28;pointer-events:none}
+.bg-cath .brick,.bg-cath .stone,.bg-cath .hole,.bg-cath .tree{fill:none;stroke:var(--olive);stroke-width:1.1}
+.bg-cath .dome{fill:var(--linen);stroke:var(--olive);stroke-width:1.1}
+.bg-cath .rib{fill:none;stroke:var(--olive);stroke-width:.8}
+.bg-cath .gold{fill:var(--olive);stroke:none}
+.bg-cath .ground{fill:none;stroke:var(--olive);stroke-width:1.2}
+.band.beige{--band:var(--beige)}
+
+.center{text-align:center;justify-items:center}
+.center p{margin-inline:auto}
+.lede{font-family:var(--display);font-size:clamp(26px,6vw,34px);line-height:1.25;font-style:italic;color:var(--olive)}
+
+nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+nav a{color:var(--muted);text-decoration:none;font-weight:400}
+nav a:hover{color:var(--accent)}
+
+.hero{position:relative;margin-top:-72px;margin-bottom:56px;background:var(--card);outline:1px solid var(--line);outline-offset:-10px;border-radius:2px;box-shadow:var(--shadow);text-align:center;
+  padding:52px 24px 44px;display:grid;gap:16px;justify-items:center}
+.cover{position:relative;display:grid;align-content:start;justify-items:center;text-align:center;
+  height:clamp(480px,82svh,780px);
+  margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));
+  background:var(--photo) center 38%/cover no-repeat;color:var(--on-photo);
+  padding:calc(64px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+.cover::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(25,25,20,.5) 0%,rgba(25,25,20,.12) 42%,rgba(25,25,20,0) 60%);pointer-events:none}
+.cover > *{position:relative}
+@media (min-width:800px){
+  .cover{isolation:isolate;overflow:hidden;background:none}
+  .cover::before{z-index:-1;background:linear-gradient(180deg,rgba(25,25,20,.5) 0%,rgba(25,25,20,.12) 42%,rgba(25,25,20,0) 60%),var(--photo) center/auto 100% no-repeat}
+  .cover::after{content:"";position:absolute;inset:-40px;z-index:-2;background:var(--photo) center/cover no-repeat;filter:blur(28px) brightness(.8)}
+}
+.cover .lang{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));color:var(--on-photo)}
+.cover .lang button{color:var(--on-photo);opacity:.8}
+.cover .lang button[aria-pressed="true"]{opacity:1;color:var(--on-photo);border-bottom-color:var(--on-photo)}
+.cover .tagline{color:var(--on-photo);font-family:var(--body);font-size:clamp(18px,4.6vw,26px);letter-spacing:.32em;text-transform:uppercase;font-weight:500;text-shadow:0 1px 14px rgba(0,0,0,.45)}
+.cover .names{color:var(--on-photo);font-family:var(--display);font-style:italic;font-weight:500;letter-spacing:-.01em;font-size:clamp(46px,12.5vw,104px);line-height:1.02;margin-top:10px;text-shadow:0 2px 24px rgba(0,0,0,.25)}
+.cover .short{margin-top:14px;font-size:15px;font-weight:500;letter-spacing:.3em;color:var(--on-photo);text-shadow:0 1px 12px rgba(0,0,0,.45)}
+.mono{width:132px;height:132px;color:var(--accent)}
+.mono text{font-family:var(--display);font-weight:400;fill:currentColor}
+.names{font-size:clamp(40px,9vw,64px);line-height:1.1;font-weight:400;color:var(--ink)}
+.rule{width:120px;height:1px;background:var(--soft)}
+.tagline{font-family:var(--display);font-size:clamp(26px,5vw,34px);color:var(--muted);line-height:1.2}
+.caps{font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);font-weight:400}
+.venue{color:var(--muted);font-size:15px;margin-top:-8px}
+.dotrule{display:flex;align-items:center;gap:8px;color:var(--sage)}
+.dotrule::before,.dotrule::after{content:"";width:44px;height:1px;background:currentColor}
+.dotrule i{width:6px;height:6px;border-radius:50%;background:var(--burgundy)}
+.count{display:flex;gap:28px;margin-top:6px;font-variant-numeric:tabular-nums}
+.count div{display:grid}
+.count b{font-family:var(--display);font-weight:500;font-size:38px;line-height:1.1;color:var(--burgundy)}
+.count span{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.btn{display:inline-block;font:500 13px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;
+  background:var(--burgundy);color:var(--card);border:0;border-radius:2px;padding:15px 30px;cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--burgundy-dark)}
+#when{color:var(--olive);font-weight:500}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+
+section{display:grid;gap:18px}
+section{scroll-margin-top:24px}
+section > h2{font-size:clamp(30px,5.4vw,40px);font-weight:500;font-style:italic;color:var(--burgundy);text-align:center;display:grid;justify-items:center;gap:10px;margin-bottom:6px}
+section > h2::after{content:"";width:140px;height:26px;background:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 26'><path d='M0 25 L34 9 L46 15 L64 2 L84 16 L98 10 L140 25' fill='none' stroke='%239fae8a' stroke-width='1.2'/><path d='M112%209.0%20L115.8%2016.7%20L114.0%2016.7%20L116.5%2023.7%20L112.7%2023.7%20L112.7%2025%20L111.3%2025%20L111.3%2023.7%20L107.5%2023.7%20L110.0%2016.7%20L108.2%2016.7%20Z' fill='%235f6b3a'/><path d='M121%2013.0%20L123.9%2018.8%20L122.5%2018.8%20L124.5%2024.0%20L121.6%2024.0%20L121.6%2025%20L120.4%2025%20L120.4%2024.0%20L117.5%2024.0%20L119.5%2018.8%20L118.1%2018.8%20Z' fill='%235f6b3a'/></svg>") center/contain no-repeat}
+p{margin:0;max-width:62ch}
+
+.rows{display:grid;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.row .t{font-family:var(--display);font-size:24px;font-weight:500;color:var(--accent);font-variant-numeric:tabular-nums}
+.row h3{font-family:var(--body);font-weight:500;font-size:17px}
+.row p,.row li{color:var(--muted)}
+.row > div{display:grid;gap:8px}
+.row ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.row.key{background:var(--card);box-shadow:var(--shadow);margin-inline:-14px;padding-inline:14px;border-radius:2px;border-bottom-color:transparent}
+.row.key .t{font-size:26px}
+.row.key h3{font-family:var(--display);font-size:28px;font-weight:500}
+.meta{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:500}
+.tag{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);border-radius:2px;padding:1px 9px;color:var(--muted);margin-left:6px;vertical-align:2px}
+.callout{border-left:2px solid var(--accent);padding:4px 0 4px 16px;color:var(--muted);max-width:62ch}
+.callout strong{color:var(--ink);font-weight:500}
+.row > div{min-width:0}
+
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.cols h3{font-family:var(--body);font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+
+details{border-bottom:1px solid var(--line);padding:14px 0}
+details:first-of-type{border-top:1px solid var(--line)}
+summary{cursor:pointer;font-weight:400;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"+";color:var(--accent);font-size:20px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);margin-top:8px}
+
+form{background:var(--linen);box-shadow:var(--shadow);border-radius:2px;padding:28px 24px;display:grid;gap:18px}
+.field{display:grid;gap:6px}
+label,.legend{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+input,select,textarea{font:inherit;font-weight:400;color:var(--ink);background:var(--linen);border:1px solid var(--line);border-radius:2px;padding:11px 12px;width:100%}
+textarea{min-height:84px;resize:vertical}
+.choice{display:flex;flex-wrap:wrap;gap:10px}
+.choice label{display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0;font-size:16px;color:var(--ink);
+  border:1px solid var(--line);border-radius:2px;padding:9px 16px;cursor:pointer;background:var(--linen)}
+.choice input{width:auto;accent-color:var(--burgundy)}
+.choice label:has(input:checked){border-color:var(--burgundy);background:var(--card)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+.status{font-size:15px;min-height:1.4em}
+.status.ok{color:var(--olive)} .status.err{color:var(--burgundy)}
+.note{font-size:14px;color:var(--muted)}
+
+.guestlist{display:grid;gap:12px}
+.tally{display:flex;flex-wrap:wrap;gap:24px;font-variant-numeric:tabular-nums}
+.tally b{font-family:var(--display);font-weight:400;font-size:30px;display:block;line-height:1}
+.tally span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.pill{font-size:12px;padding:2px 9px;border-radius:2px;white-space:nowrap}
+.pill.yes{background:color-mix(in srgb,var(--accent) 22%,transparent)}
+.pill.no{background:var(--tint)}
+
+.lang{display:flex;justify-content:flex-end;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+.lang button{font:inherit;letter-spacing:inherit;text-transform:inherit;background:none;border:0;padding:4px 0;color:var(--muted);cursor:pointer;border-bottom:1px solid transparent}
+.lang button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+footer{text-align:center;color:var(--muted);display:grid;gap:10px;justify-items:center;padding-top:56px}
+footer .valley{width:min(420px,100%);height:auto;overflow:visible}
+.valley .peak{fill:var(--sage-tint);stroke:var(--olive);stroke-width:1.2}
+.valley .hill{fill:#f1ede2;stroke:var(--olive);stroke-width:1.2}
+.valley .ridge{fill:none;stroke:var(--sage);stroke-width:1}
+.valley .pine{fill:var(--olive)}
+.valley .wall{fill:var(--card);stroke:var(--olive);stroke-width:1.1}
+.valley .roof{fill:var(--burgundy)}
+.valley .trim{fill:none;stroke:var(--olive);stroke-width:.9}
+.valley .reflect{opacity:.22}
+.valley .water{stroke:var(--olive);stroke-width:1.2}
+.valley .ripple{stroke:var(--sage);stroke-width:1.2;stroke-linecap:round}
+.place{padding-block:56px;display:grid;gap:26px}
+#venue > h2::after,#rsvp > h2::after,#guests > h2::after{content:none}
+.travel{display:grid;gap:30px}
+.travel .intro-t{text-align:center;margin-inline:auto;font-family:var(--display);font-style:italic;font-size:21px;line-height:1.45;color:var(--olive);max-width:40ch}
+.week{display:grid;background:var(--linen);box-shadow:var(--shadow)}
+.day{display:grid;grid-template-columns:84px 1fr;gap:16px;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line)}
+.day:last-child{border-bottom:0}
+.day .d{display:grid;justify-items:center;line-height:1}
+.day .d small{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.day .d b{font-family:var(--display);font-weight:500;font-size:34px;color:var(--burgundy);margin-top:4px}
+.day h3{font-family:var(--body);font-weight:600;font-size:16px;color:var(--ink)}
+.day p{color:var(--muted);font-size:15px}
+.day > div:last-child{min-width:0}
+.day.key{background:var(--card)}
+.day.key h3{font-family:var(--display);font-style:italic;font-weight:500;font-size:22px;color:var(--burgundy)}
+.week-note{text-align:center;margin-inline:auto;color:var(--ink);font-size:15px;max-width:52ch}
+.tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.tip{background:var(--linen);padding:20px 20px 22px;display:grid;gap:8px;align-content:start;border-top:3px solid var(--sage)}
+.tip h3{font-family:var(--body);font-weight:600;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--olive)}
+.tip p{font-size:15px;color:var(--ink)}
+.place .print{margin:0;background:#fff;padding:10px 10px 12px;box-shadow:var(--shadow);transform:rotate(-1.2deg)}
+.place .print img{display:block;width:100%;height:auto}
+.place .info{display:grid;gap:10px;justify-items:center;text-align:center}
+.place .vname{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(26px,5vw,32px);color:var(--olive)}
+.place .info p{color:var(--muted);max-width:46ch}
+footer .mono{width:72px;height:72px}
+.nw{white-space:nowrap}
+footer .sig{font-family:var(--display);font-style:italic;font-weight:500;font-size:32px;color:var(--burgundy);line-height:1.2}
+@media (max-width:480px){.row{grid-template-columns:1fr;gap:4px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+</head>
+<body>
+
+
+<header class="cover" role="img" aria-label="Ana Paula and Duncan in the Andes near Cuenca">
+  <div class="lang" role="group" aria-label="Language / Idioma">
+    <button type="button" id="lang-en" data-lang="en" aria-pressed="true">English</button><span aria-hidden="true">·</span><button type="button" id="lang-es" data-lang="es" aria-pressed="false">Español</button>
+  </div>
+  <div class="tagline" data-t="tagline">Save the Date</div>
+  <h1 class="names"><span class="nw" data-k="name1">Ana Paula</span> <span class="nw">&amp; <span data-k="name2">Duncan</span></span></h1>
+  <div class="caps short">14 · 08 · 2027</div>
+</header>
+
+<div class="wrap" style="max-width:640px;padding-block:0">
+  <div class="hero">
+    <div class="caps" id="when">Saturday, August 14, 2027</div>
+    <div class="dotrule" aria-hidden="true"><i></i></div>
+    <div class="caps" data-k="city">Cuenca • Azuay • Ecuador</div>
+    <div class="venue" data-k="venue">Hostería Dos Chorreras</div>
+    <div class="count" id="count" aria-label="Countdown to the wedding"></div>
+    <a class="btn" href="#rsvp" data-t="heroBtn">Let us know</a>
+  </div>
+
+  <section class="center band sage with-art">
+    <svg class="bg-cath" viewBox="0 0 400 300" aria-hidden="true">
+      <!-- trees -->
+      <path class="tree" d="M22 262 C10 250 12 228 28 222 C30 206 50 202 58 214 C72 210 80 228 70 240 C78 252 66 264 52 262 Z"/>
+      <path class="tree" d="M378 262 C390 250 388 228 372 222 C370 206 350 202 342 214 C328 210 320 228 330 240 C322 252 334 264 348 262 Z"/>
+      <!-- side domes on drums -->
+      <rect class="stone" x="84" y="118" width="42" height="26"/>
+      <path class="dome" d="M82 118 A23 30 0 0 1 128 118 Z"/>
+      <path class="rib" d="M105 88 Q92 100 90 118 M105 88 Q100 102 99 118 M105 88 Q110 102 111 118 M105 88 Q118 100 120 118"/>
+      <rect class="gold" x="102" y="80" width="6" height="8"/>
+      <rect class="stone" x="274" y="118" width="42" height="26"/>
+      <path class="dome" d="M272 118 A23 30 0 0 1 318 118 Z"/>
+      <path class="rib" d="M295 88 Q282 100 280 118 M295 88 Q290 102 289 118 M295 88 Q300 102 301 118 M295 88 Q308 100 310 118"/>
+      <rect class="gold" x="292" y="80" width="6" height="8"/>
+      <!-- central drum, dome, lantern, cross -->
+      <rect class="stone" x="150" y="98" width="100" height="46"/>
+      <path class="hole" d="M162 140 V118 A6 6 0 0 1 174 118 V140 Z M184 140 V118 A6 6 0 0 1 196 118 V140 Z M204 140 V118 A6 6 0 0 1 216 118 V140 Z M226 140 V118 A6 6 0 0 1 238 118 V140 Z"/>
+      <rect class="stone" x="144" y="92" width="112" height="8"/>
+      <path class="dome" d="M146 92 A54 62 0 0 1 254 92 Z"/>
+      <path class="rib" d="M200 30 Q166 50 158 92 M200 30 Q180 56 176 92 M200 30 Q196 60 194 92 M200 30 Q204 60 206 92 M200 30 Q220 56 224 92 M200 30 Q234 50 242 92"/>
+      <path class="rib" d="M150 76 Q200 64 250 76" />
+      <rect class="stone" x="192" y="18" width="16" height="14"/>
+      <path class="dome" d="M190 18 A10 9 0 0 1 210 18 Z"/>
+      <path class="gold" d="M199 0 H201 V4 H205 V6 H201 V10 H199 V6 H195 V4 H199 Z"/>
+      <!-- towers -->
+      <rect class="brick" x="58" y="150" width="70" height="112"/>
+      <rect class="brick" x="272" y="150" width="70" height="112"/>
+      <rect class="stone" x="54" y="144" width="78" height="8"/>
+      <rect class="stone" x="268" y="144" width="78" height="8"/>
+      <path class="hole" d="M76 196 V172 A7 7 0 0 1 90 172 V196 Z M96 196 V172 A7 7 0 0 1 110 172 V196 Z M290 196 V172 A7 7 0 0 1 304 172 V196 Z M310 196 V172 A7 7 0 0 1 324 172 V196 Z"/>
+      <path class="hole" d="M84 244 V222 A9 9 0 0 1 102 222 V244 Z M298 244 V222 A9 9 0 0 1 316 222 V244 Z"/>
+      <!-- central facade with gable, rose window and portal -->
+      <rect class="brick" x="128" y="160" width="144" height="102"/>
+      <path class="stone" d="M122 162 L200 128 L278 162 Z"/>
+      <circle class="stone" cx="200" cy="186" r="17"/>
+      <circle class="hole" cx="200" cy="186" r="11"/>
+      <path class="rib" d="M200 175 V197 M189 186 H211 M192 178 L208 194 M208 178 L192 194"/>
+      <path class="stone" d="M174 262 V230 A26 26 0 0 1 226 230 V262 Z"/>
+      <path class="hole" d="M182 262 V232 A18 18 0 0 1 218 232 V262 Z"/>
+      <path class="hole" d="M140 250 V226 A7 7 0 0 1 154 226 V250 Z M246 250 V226 A7 7 0 0 1 260 226 V250 Z"/>
+      <!-- ground -->
+      <path class="ground" d="M0 262 H400"/>
+    </svg>
+    <p class="lede" data-t="lede">We’re getting married, and we want you there.</p>
+    <p data-t="intro">On August 14, 2027, we’ll say “I do” in Cuenca, Ecuador, surrounded by the mountains and the people we love most. It would mean so much to have you with us. The formal invitation will follow soon; for now, just let us know if you think you can make it.</p>
+  </section>
+
+  <section id="venue" class="place">
+    <h2 data-t="venueTitle">The venue</h2>
+    <figure class="print"><img id="venuePhoto" src="venue.jpg" loading="lazy" width="900" height="600" alt="Hostería Dos Chorreras, a mountain lodge beside a lake in the Cajas highlands" data-ta="venueAlt"></figure>
+    <div class="info">
+      <h3 class="vname">Hostería Dos Chorreras</h3>
+      <div class="caps">Km 21 · Vía al Cajas · Cuenca</div>
+      <p data-t="venueText">A mountain lodge between two waterfalls at the edge of Cajas National Park at 3,435 m (11,270 ft), about 30 minutes from Cuenca.</p>
+      <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Hosteria+Dos+Chorreras+Cuenca+Ecuador" target="_blank" rel="noopener" data-t="mapLink">Open in Google Maps</a>
+    </div>
+  </section>
+
+  <section id="travel" class="band sage travel">
+    <h2 data-t="travelTitle">Coming from abroad?</h2>
+    <p class="intro-t" data-t="travelIntro">Many of you will be travelling a long way, so we're planning activities before and after the wedding to make the trip worth it.</p>
+    <div class="week">
+      <div class="day"><div class="d" data-day="2027-08-12"></div><div><h3 data-t="d1Title">Welcome get-together</h3><p data-t="d1Text">Dinner and a little party so everyone can mix and get to know each other.</p></div></div>
+      <div class="day"><div class="d" data-day="2027-08-13"></div><div><h3 data-t="d2Title">City tour</h3><p data-t="d2Text">Sightseeing around Cuenca's best-known landmarks.</p></div></div>
+      <div class="day key"><div class="d" data-day="2027-08-14"></div><div><h3 data-t="d3Title">The wedding</h3><p data-t="d3Text">At Hostería Dos Chorreras.</p></div></div>
+      <div class="day"><div class="d" data-day="2027-08-15"></div><div><h3 data-t="d4Title">Brunch and a relaxing activity</h3><p data-t="d4Text">A slow, relaxing day after the celebration.</p></div></div>
+    </div>
+    <p class="week-note" data-t="weekNote">We'll share more details closer to the date. Plan to arrive by Wednesday, August 11, so you're settled in for Thursday.</p>
+    <div class="tips">
+      <div class="tip"><h3 data-t="flightsH">Flights</h3><p data-t="flightsT"></p></div>
+      <div class="tip"><h3 data-t="weatherH">Weather</h3><p data-t="weatherT"></p></div>
+      <div class="tip"><h3 data-t="hotelsH">Hotels</h3><p data-t="hotelsT"></p></div>
+      <div class="tip"><h3>Galápagos</h3><p data-t="galT"></p></div>
+    </div>
+  </section>
+
+  <section id="rsvp" class="band beige">
+    <h2 data-t="formTitle">Will you be there?</h2>
+    <form id="rsvpForm" novalidate>
+      <div class="field"><label for="f-name" data-t="nameLabel">Your name</label><input id="f-name" name="name" autocomplete="name" required></div>
+      <div class="field">
+        <span class="legend" id="lg-attend"></span>
+        <div class="choice" role="radiogroup" aria-labelledby="lg-attend">
+          <label><input type="radio" id="f-yes" name="attending" value="yes" required> <span data-t="yes">Yes, I'll be there</span></label>
+          <label><input type="radio" id="f-no" name="attending" value="no"> <span data-t="no">Sorry, I can't make it</span></label>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px">
+        <button class="btn" type="submit" id="submitBtn">Send reply</button>
+        <span class="status" id="status" role="status"></span>
+      </div>
+      <p class="note" id="rsvpNote" data-t="signInNote" hidden>Replying here needs you to be signed in to view this page. If the button doesn't work for you, just message us your answer.</p>
+    </form>
+  </section>
+
+  <section id="guests" style="padding-block:48px" hidden>
+    <h2>Replies</h2>
+    <p class="note" style="text-align:center;margin-inline:auto">Only you can see this list.</p>
+    <div class="guestlist">
+      <div class="tally" id="tally"></div>
+      <div class="tablewrap"><table><thead><tr><th>Name</th><th>Reply</th><th>Language</th><th>Received</th></tr></thead><tbody id="guestRows"></tbody></table></div>
+      <p class="note" id="noReplies">No replies yet. They'll appear here as people answer.</p>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const WEDDING = {
+  name1: "Ana Paula", name2: "Duncan",
+  date: "2027-08-14T17:00:00-05:00",   // 5 PM in Cuenca
+  venue: "Hostería Dos Chorreras", city: "Cuenca • Azuay • Ecuador",
+  rsvpUrl: ""   // paste your Google Apps Script web app URL here (see README.md)
+};
+
+document.querySelectorAll("[data-k]").forEach(el => el.textContent = WEDDING[el.dataset.k]);
+const wDate = new Date(WEDDING.date);
+
+const T = {
+  en: {
+    locale: "en-US", tagline: "Save the Date", heroBtn: "Let us know",
+    lede: "We’re getting married, and we want you there.",
+    intro: "On August 14, 2027, we’ll say “I do” in Cuenca, Ecuador, surrounded by the mountains and the people we love most. It would mean so much to have you with us. The formal invitation will follow soon; for now, just let us know if you think you can make it.",
+    formTitle: "Will you be there?",
+    travelTitle: "Coming from abroad?",
+    travelIntro: "Many of you will be travelling a long way, so we're planning activities before and after the wedding to make the trip worth it.",
+    d1Title: "Welcome get-together", d1Text: "Dinner and a little party so everyone can mix and get to know each other.",
+    d2Title: "City tour", d2Text: "Sightseeing around Cuenca's best-known landmarks.",
+    d3Title: "The wedding", d3Text: "At Hostería Dos Chorreras.",
+    d4Title: "Brunch and a relaxing activity", d4Text: "A slow, relaxing day after the celebration.",
+    weekNote: "We'll share more details closer to the date. Plan to arrive by Wednesday, August 11, so you're settled in for Thursday.",
+    flightsH: "Flights", flightsT: "Book your flights into Cuenca (CUE), Mariscal Lamar International Airport. There are no direct international flights, so you'll connect in Quito (UIO), about 50 minutes away with several flights a day on LATAM and Avianca, or in Guayaquil (GYE).",
+    weatherH: "Weather", weatherT: "August is dry season in Cuenca. Days are about 16–22 °C and nights drop to 5–10 °C, so bring layers. The city sits at 2,550 m, so the sun is strong and it's worth taking your first day slowly.",
+    hotelsH: "Hotels", hotelsT: "We're negotiating the best rates we can at hotels in Cuenca and will share them with you soon.",
+    galT: "Thinking of adding a trip to the Galápagos? We'll find a good travel agent to help you arrange it.", venueTitle: "The venue", mapLink: "Open in Google Maps",
+    venueText: "A mountain lodge between two waterfalls at the edge of Cajas National Park at 3,435 m (11,270 ft), about 30 minutes from Cuenca.",
+    venueAlt: "Hostería Dos Chorreras, a mountain lodge beside a lake in the Cajas highlands", nameLabel: "Your name",
+    yes: "Yes, I'll be there", no: "Sorry, I can't make it", send: "Send reply", update: "Update reply",
+    days: "days", hours: "hours", countdown: "Countdown to the wedding",
+    needName: "Please add your name.", needChoice: "Please choose yes or no.",
+    unavailable: "Replying isn't available here. Please message us your answer.",
+    notSetUp: "Replies aren't set up yet. Please message us your answer.",
+    sending: "Sending…", thanksYes: "Wonderful! We can't wait to celebrate with you.",
+    thanksNo: "Thank you for letting us know. You'll be missed.",
+    failed: "We couldn't save your reply. Please try again, or message us directly.",
+    haveReply: "We have your reply. You can change it here.",
+    signInNote: "Replying here needs you to be signed in to view this page. If the button doesn't work for you, just message us your answer."
+  },
+  es: {
+    locale: "es-EC", tagline: "Reserva la fecha", heroBtn: "Confírmanos",
+    lede: "Nos casamos y queremos que estés ahí.",
+    intro: "El 14 de agosto de 2027 nos daremos el sí en Cuenca, Ecuador, rodeados de montañas y de las personas que más queremos. Significaría mucho tenerte con nosotros. Pronto te enviaremos la invitación formal; por ahora, solo cuéntanos si crees que podrás acompañarnos.",
+    formTitle: "¿Nos acompañas?",
+    travelTitle: "¿Vienes desde el exterior?",
+    travelIntro: "Sabemos que muchos vendrán de lejos, así que estamos preparando actividades antes y después de la boda para que el viaje valga la pena.",
+    d1Title: "Encuentro de bienvenida", d1Text: "Una cena y una pequeña fiesta para que todos se mezclen y se conozcan.",
+    d2Title: "Tour por la ciudad", d2Text: "Un recorrido por los lugares más emblemáticos de Cuenca.",
+    d3Title: "La boda", d3Text: "En la Hostería Dos Chorreras.",
+    d4Title: "Brunch y una actividad relajante", d4Text: "Un día tranquilo para descansar después de la celebración.",
+    weekNote: "Te daremos más detalles más adelante. Planea llegar hasta el miércoles 11 de agosto para estar instalado el jueves.",
+    flightsH: "Vuelos", flightsT: "Reserva tus vuelos con destino final Cuenca (CUE), Aeropuerto Internacional Mariscal Lamar. No hay vuelos internacionales directos, así que harás conexión en Quito (UIO), a unos 50 minutos, con varios vuelos diarios de LATAM y Avianca, o en Guayaquil (GYE).",
+    weatherH: "Clima", weatherT: "Agosto es temporada seca en Cuenca. Los días están entre 16 y 22 °C y las noches bajan a 5–10 °C, así que trae ropa para abrigarte en capas. La ciudad está a 2.550 m de altura: el sol es fuerte y conviene tomar el primer día con calma.",
+    hotelsH: "Hoteles", hotelsT: "Estamos negociando las mejores tarifas posibles en hoteles de Cuenca y pronto te las compartiremos.",
+    galT: "¿Quieres aprovechar para conocer Galápagos? Buscaremos una buena agencia de viajes que te ayude a organizarlo.", venueTitle: "El lugar", mapLink: "Abrir en Google Maps",
+    venueText: "Una hostería de montaña entre dos cascadas, al borde del Parque Nacional Cajas a 3.435 m de altura, a unos 30 minutos de Cuenca.",
+    venueAlt: "Hostería Dos Chorreras, una hostería de montaña junto a una laguna en el Cajas", nameLabel: "Tu nombre",
+    yes: "Sí, ahí estaré", no: "Lo siento, no podré ir", send: "Enviar respuesta", update: "Actualizar respuesta",
+    days: "días", hours: "horas", countdown: "Cuenta regresiva para la boda",
+    needName: "Por favor, escribe tu nombre.", needChoice: "Por favor, elige sí o no.",
+    unavailable: "No es posible responder aquí. Envíanos tu respuesta por mensaje.",
+    notSetUp: "Las respuestas aún no están activadas. Envíanos tu respuesta por mensaje.",
+    sending: "Enviando…", thanksYes: "¡Qué alegría! Tenemos muchas ganas de celebrar contigo.",
+    thanksNo: "Gracias por avisarnos. Te vamos a extrañar.",
+    failed: "No pudimos guardar tu respuesta. Inténtalo de nuevo o escríbenos directamente.",
+    haveReply: "Ya tenemos tu respuesta. Puedes cambiarla aquí.",
+    signInNote: "Para responder aquí tienes que haber iniciado sesión. Si el botón no te funciona, envíanos tu respuesta por mensaje."
+  }
+};
+
+let lang = "en", hasReply = false, lastStatus = null;
+function t(key){ return T[lang][key]; }
+function longDate(){
+  return wDate.toLocaleDateString(t("locale"),{weekday:"long",month:"long",day:"numeric",year:"numeric",timeZone:"America/Guayaquil"});
+}
+function tick(){
+  const ms = Math.max(0, wDate - Date.now());
+  const d = Math.floor(ms/864e5), h = Math.floor(ms/36e5)%24;
+  const count = document.getElementById("count");
+  count.setAttribute("aria-label", t("countdown"));
+  count.innerHTML = [[d,t("days")],[h,t("hours")]].map(([v,l])=>`<div><b>${v}</b><span>${l}</span></div>`).join("");
+}
+function applyLang(l){
+  lang = T[l] ? l : "en";
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-t]").forEach(el => el.textContent = t(el.dataset.t));
+  document.querySelectorAll("[data-tp]").forEach(el => el.placeholder = t(el.dataset.tp));
+  document.querySelectorAll("[data-ta]").forEach(el => el.alt = t(el.dataset.ta));
+  document.querySelectorAll("[data-day]").forEach(el => {
+    const d = new Date(el.dataset.day + "T12:00:00-05:00"), o = {timeZone:"America/Guayaquil"};
+    el.innerHTML = `<small>${d.toLocaleDateString(t("locale"),{...o,weekday:"short"}).replace(".","")}</small><b>${d.toLocaleDateString(t("locale"),{...o,day:"numeric"})}</b><small>${d.toLocaleDateString(t("locale"),{...o,month:"short"}).replace(".","")}</small>`;
+  });
+  document.getElementById("when").textContent = longDate();
+  document.getElementById("lg-attend").textContent = longDate();
+  document.getElementById("submitBtn").textContent = t(hasReply ? "update" : "send");
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+  if(lastStatus) setStatus(lastStatus.key, lastStatus.cls);
+  tick();
+}
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => {
+  applyLang(b.dataset.lang);
+  try { localStorage.setItem("lang", lang); } catch(_){}
+}));
+let saved = null;
+try { saved = localStorage.getItem("lang"); } catch(_){}
+const prefersEs = (navigator.languages || [navigator.language || ""]).some(x => /^es\b/i.test(x));
+
+// Reply form
+const form = document.getElementById("rsvpForm"), statusEl = document.getElementById("status");
+function setStatus(key, cls){ lastStatus = {key, cls}; statusEl.textContent = t(key); statusEl.className = "status " + (cls||""); }
+function esc(s){ return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function readForm(){ return { name: form.name.value.trim().slice(0,120), attending: form.attending.value, lang }; }
+
+applyLang(saved || (prefersEs ? "es" : "en"));
+setInterval(tick, 60000);
+
+// Replies go to a Google Sheet through a Google Apps Script web app (see README.md)
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+  const data = readForm();
+  if(!data.name){ setStatus("needName", "err"); form.name.focus(); return; }
+  if(!data.attending){ setStatus("needChoice", "err"); return; }
+  if(!WEDDING.rsvpUrl){ setStatus("notSetUp", "err"); return; }
+  const btn = document.getElementById("submitBtn"); btn.disabled = true; setStatus("sending");
+  try {
+    // text/plain avoids a CORS preflight, which Apps Script does not answer
+    await fetch(WEDDING.rsvpUrl, { method: "POST", mode: "no-cors", headers: {"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify(data) });
+    form.reset();
+    setStatus(data.attending === "yes" ? "thanksYes" : "thanksNo", "ok");
+  } catch(err){
+    setStatus("failed", "err");
+  } finally { btn.disabled = false; }
+});
+</script>
+</body>
+</html>
