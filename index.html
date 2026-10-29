@@ -87,6 +87,17 @@ nav a:hover{color:var(--accent)}
   background:var(--burgundy);color:var(--card);border:0;border-radius:2px;padding:15px 30px;cursor:pointer;text-decoration:none}
 .btn:hover{background:var(--burgundy-dark)}
 #when{color:var(--olive);font-weight:500}
+.cal{position:relative;display:grid;justify-items:center;border:0;padding:0}
+.cal summary{list-style:none;cursor:pointer;display:inline-flex;justify-content:center;align-items:center;gap:10px;max-width:100%;text-align:center;letter-spacing:.12em;padding-inline:22px}
+details.cal summary::after,details.cal[open] summary::after{content:none}
+.cal > summary{width:fit-content;margin-inline:auto}
+.cal summary::-webkit-details-marker{display:none}
+.cal summary svg{width:15px;height:15px;flex:none}
+.cal-menu{margin-top:10px;background:var(--linen);box-shadow:var(--shadow);display:grid;min-width:230px;text-align:left}
+.cal-menu a{display:flex;justify-content:space-between;gap:16px;padding:13px 18px;color:var(--ink);text-decoration:none;font-size:15px;font-weight:500;border-bottom:1px solid var(--line)}
+.cal-menu a:last-child{border-bottom:0}
+.cal-menu a:hover,.cal-menu a:focus-visible{background:var(--card);color:var(--burgundy)}
+.cal-menu a span{color:var(--muted);font-weight:400;font-size:13px}
 .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
 
 section{display:grid;gap:18px}
@@ -215,7 +226,14 @@ footer .sig{font-family:var(--display);font-style:italic;font-weight:500;font-si
     <div class="caps" data-k="city">Cuenca • Azuay • Ecuador</div>
     <div class="venue" data-k="venue">Hostería Dos Chorreras</div>
     <div class="count" id="count" aria-label="Countdown to the wedding"></div>
-    <a class="btn" href="#rsvp" data-t="heroBtn">Let us know</a>
+    <details class="cal" id="cal">
+      <summary class="btn"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3.5h12v10.5H2z M2 6.5h12 M5 1.5v3.5 M11 1.5v3.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span data-t="calBtn">Add to calendar</span></summary>
+      <div class="cal-menu">
+        <a id="cal-google" href="#" target="_blank" rel="noopener">Google Calendar</a>
+        <a id="cal-ics" href="wedding.ics" target="_blank" rel="noopener"><span data-t="calApple" style="color:inherit;font-weight:500;font-size:15px">Apple / iPhone</span><span>.ics</span></a>
+        <a id="cal-outlook" href="#" target="_blank" rel="noopener">Outlook</a>
+      </div>
+    </details>
   </div>
 
   <section class="center band sage with-art">
@@ -331,7 +349,7 @@ const wDate = new Date(WEDDING.date);
 
 const T = {
   en: {
-    locale: "en-US", tagline: "Save the Date", heroBtn: "Let us know",
+    locale: "en-US", tagline: "Save the Date", calBtn: "Add to calendar", calApple: "Apple / iPhone", calTitle: "Ana Paula & Duncan’s wedding",
     lede: "We’re getting married, and we want you there.",
     intro: "On August 14, 2027, we’ll say “I do” in Cuenca, Ecuador, surrounded by the mountains and the people we love most. It would mean so much to have you with us. The formal invitation will follow soon; for now, just let us know if you think you can make it.",
     formTitle: "Will you be there?",
@@ -360,7 +378,7 @@ const T = {
     signInNote: "Replying here needs you to be signed in to view this page. If the button doesn't work for you, just message us your answer."
   },
   es: {
-    locale: "es-EC", tagline: "Save the Date", heroBtn: "Confírmanos",
+    locale: "es-EC", tagline: "Save the Date", calBtn: "Agregar al calendario", calApple: "Apple / iPhone", calTitle: "Boda de Ana Paula y Duncan",
     lede: "Nos casamos y queremos que estés ahí.",
     intro: "El 14 de agosto de 2027 celebraremos la unión de nuestras vidas en un lugar especial para nosotros y rodeados de las personas que más queremos. Significaría mucho tenerte con nosotros. Pronto te enviaremos la invitación formal; por ahora, solo cuéntanos si crees que podrás acompañarnos.",
     formTitle: "¿Nos acompañas?",
@@ -402,12 +420,23 @@ function tick(){
   count.setAttribute("aria-label", t("countdown"));
   count.innerHTML = [[d,t("days")],[h,t("hours")]].map(([v,l])=>`<div><b>${v}</b><span>${l}</span></div>`).join("");
 }
+// All-day event on the wedding date; the time is left out on purpose
+function setCalendarLinks(){
+  const title = t("calTitle"), place = "Hostería Dos Chorreras, Km 21 Vía al Cajas, Cuenca, Ecuador";
+  const site = "https://anapaulaguillen.github.io/wedding-website/";
+  const q = o => Object.entries(o).map(([k,v]) => k + "=" + encodeURIComponent(v)).join("&");
+  document.getElementById("cal-google").href = "https://calendar.google.com/calendar/render?" +
+    q({action:"TEMPLATE", text:title, location:place, details:site}) + "&dates=20270814/20270815";
+  document.getElementById("cal-outlook").href = "https://outlook.live.com/calendar/0/deeplink/compose?" +
+    q({path:"/calendar/action/compose", rru:"addevent", subject:title, startdt:"2027-08-14", enddt:"2027-08-15", allday:"true", location:place, body:site});
+}
 function applyLang(l){
   lang = T[l] ? l : "en";
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-t]").forEach(el => el.textContent = t(el.dataset.t));
   document.querySelectorAll("[data-tp]").forEach(el => el.placeholder = t(el.dataset.tp));
   document.querySelectorAll("[data-ta]").forEach(el => el.alt = t(el.dataset.ta));
+  setCalendarLinks();
   document.querySelectorAll("[data-day]").forEach(el => {
     const d = new Date(el.dataset.day + "T12:00:00-05:00"), o = {timeZone:"America/Guayaquil"};
     el.innerHTML = `<small>${d.toLocaleDateString(t("locale"),{...o,weekday:"short"}).replace(".","")}</small><b>${d.toLocaleDateString(t("locale"),{...o,day:"numeric"})}</b><small>${d.toLocaleDateString(t("locale"),{...o,month:"short"}).replace(".","")}</small>`;
