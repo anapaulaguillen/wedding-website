@@ -162,11 +162,11 @@ th{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
   padding:calc(12px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 12px max(16px,env(safe-area-inset-left,0px));
   color:var(--on-photo);text-shadow:0 1px 8px rgba(0,0,0,.35);transition:background-color .25s,box-shadow .25s,color .25s}
 .topnav.solid,.topnav.open{background:rgba(255,255,255,.97);color:var(--ink);text-shadow:none;box-shadow:0 1px 0 var(--line)}
-.topnav .brand{font-family:var(--display);font-style:italic;font-weight:500;font-size:20px;color:inherit;text-decoration:none;white-space:nowrap}
-.navlinks{display:flex;align-items:center;gap:24px}
+.topnav .brand{margin-right:auto;font-family:var(--display);font-style:italic;font-weight:500;font-size:20px;color:inherit;text-decoration:none;white-space:nowrap}
+.navlinks{display:flex;align-items:center;gap:24px;margin-left:auto}
 .navlinks > a{color:inherit;text-decoration:none;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;padding:6px 0;border-bottom:1px solid transparent}
 .navlinks > a:hover{border-bottom-color:currentColor}
-.topnav .lang{color:inherit;gap:8px}
+.topnav .lang{color:inherit;gap:8px;padding-left:20px;border-left:1px solid currentColor;flex:none}
 .topnav .lang button{color:inherit;opacity:.7;font-weight:500}
 .topnav .lang button[aria-pressed="true"]{opacity:1;color:inherit;border-bottom-color:currentColor}
 .menu-btn{display:none;align-items:center;gap:8px;background:none;border:1px solid currentColor;color:inherit;cursor:pointer;
@@ -180,7 +180,14 @@ th{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
   .topnav.open .navlinks{display:flex}
   .navlinks > a{padding:15px 0;border-bottom:1px solid var(--line);font-size:13px}
   .navlinks > a:hover{border-bottom-color:var(--line);color:var(--burgundy)}
-  .navlinks .lang{justify-content:flex-start;padding-top:14px}
+  .topnav .lang{padding-left:0;border-left:0}
+  .topnav .brand{font-size:18px}
+}
+@media (max-width:374px){
+  .topnav{gap:12px}
+  .topnav .brand{font-size:16px}
+  .menu-btn{padding:9px 10px}
+  .menu-btn span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 }
 footer{text-align:center;color:var(--muted);display:grid;gap:10px;justify-items:center;padding-top:56px}
 footer .valley{width:min(420px,100%);height:auto;overflow:visible}
@@ -232,16 +239,16 @@ footer .sig{font-family:var(--display);font-style:italic;font-weight:500;font-si
 
 <nav class="topnav" id="topnav" aria-label="Menu">
   <a class="brand" href="#top">Ana Paula &amp; Duncan</a>
-  <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navlinks"><i aria-hidden="true"></i><span data-t="menu">Menu</span></button>
   <div class="navlinks" id="navlinks">
     <a href="#top" data-t="navHome">Home</a>
     <a href="#venue" data-t="navVenue">The venue</a>
     <a href="#travel" data-t="navTravel">Travel</a>
     <a href="#rsvp" data-t="navRsvp">RSVP</a>
-    <div class="lang" role="group" aria-label="Language / Idioma">
-      <button type="button" id="lang-en" data-lang="en" aria-pressed="true">English</button><span aria-hidden="true">·</span><button type="button" id="lang-es" data-lang="es" aria-pressed="false">Español</button>
-    </div>
   </div>
+  <div class="lang" role="group" aria-label="Language / Idioma">
+    <button type="button" id="lang-en" data-lang="en" aria-pressed="true" aria-label="English">EN</button><span aria-hidden="true">·</span><button type="button" id="lang-es" data-lang="es" aria-pressed="false" aria-label="Español">ES</button>
+  </div>
+  <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navlinks"><i aria-hidden="true"></i><span data-t="menu">Menu</span></button>
 </nav>
 
 <header class="cover" id="top" role="img" aria-label="Ana Paula and Duncan in the Andes near Cuenca">
