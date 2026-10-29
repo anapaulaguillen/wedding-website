@@ -139,6 +139,9 @@ textarea{min-height:84px;resize:vertical}
 .choice input{width:auto;accent-color:var(--burgundy)}
 .choice label:has(input:checked){border-color:var(--burgundy);background:var(--card)}
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+.plus-one{text-align:center;margin:-8px auto 0;font-family:var(--display);font-style:italic;font-size:21px;color:var(--olive)}
+.hint{font-size:13px;color:var(--muted)}
+#f-guests{max-width:140px}
 .status{font-size:15px;min-height:1.4em}
 .status.ok{color:var(--olive)} .status.err{color:var(--burgundy)}
 .note{font-size:14px;color:var(--muted)}
@@ -345,6 +348,7 @@ footer .sig{font-family:var(--display);font-style:italic;font-weight:500;font-si
 
   <section id="rsvp" class="band beige">
     <h2 data-t="formTitle">Will you be there?</h2>
+    <p class="plus-one" data-t="plusOne">Plus-ones are welcome!</p>
     <form id="rsvpForm" novalidate>
       <div class="field"><label for="f-name" data-t="nameLabel">Your name</label><input id="f-name" name="name" autocomplete="name" required></div>
       <div class="field">
@@ -353,6 +357,11 @@ footer .sig{font-family:var(--display);font-style:italic;font-weight:500;font-si
           <label><input type="radio" id="f-yes" name="attending" value="yes" required> <span data-t="yes">Yes, I'll be there</span></label>
           <label><input type="radio" id="f-no" name="attending" value="no"> <span data-t="no">Sorry, I can't make it</span></label>
         </div>
+      </div>
+      <div class="field" id="guestsField">
+        <label for="f-guests" data-t="guestsLabel">Number of guests</label>
+        <select id="f-guests" name="guests"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+        <span class="hint" data-t="guestsHint">Including you.</span>
       </div>
       <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px">
         <button class="btn" type="submit" id="submitBtn">Send reply</button>
@@ -367,7 +376,7 @@ footer .sig{font-family:var(--display);font-style:italic;font-weight:500;font-si
     <p class="note" style="text-align:center;margin-inline:auto">Only you can see this list.</p>
     <div class="guestlist">
       <div class="tally" id="tally"></div>
-      <div class="tablewrap"><table><thead><tr><th>Name</th><th>Reply</th><th>Language</th><th>Received</th></tr></thead><tbody id="guestRows"></tbody></table></div>
+      <div class="tablewrap"><table><thead><tr><th>Name</th><th>Reply</th><th>Guests</th><th>Language</th><th>Received</th></tr></thead><tbody id="guestRows"></tbody></table></div>
       <p class="note" id="noReplies">No replies yet. They'll appear here as people answer.</p>
     </div>
   </section>
@@ -390,7 +399,7 @@ const T = {
     locale: "en-US", tagline: "Save the Date", menu: "Menu", navHome: "Home", navVenue: "The venue", navTravel: "Travel", navRsvp: "RSVP", calBtn: "Add to calendar", calApple: "Apple / iPhone", calTitle: "Ana Paula & Duncan’s wedding",
     lede: "We’re getting married, and we want you there.",
     intro: "On August 14, 2027, we’ll say “I do” in Cuenca, Ecuador, surrounded by the mountains and the people we love most. It would mean so much to have you with us. The formal invitation will follow soon; for now, just let us know if you think you can make it.",
-    formTitle: "Will you be there?",
+    formTitle: "Will you be there?", plusOne: "Plus-ones are welcome!", guestsLabel: "Number of guests", guestsHint: "Including you.",
     travelTitle: "Plan your trip",
     travelIntro: "Many of you will be travelling a long way, so we're planning activities before and after the wedding to make the trip worth it.",
     d1Title: "Welcome get-together", d1Text: "Dinner and a little party so everyone can mix and get to know each other.",
@@ -419,7 +428,7 @@ const T = {
     locale: "es-EC", tagline: "Save the Date", menu: "Menú", navHome: "Inicio", navVenue: "El lugar", navTravel: "Viaje", navRsvp: "Confirmar", calBtn: "Agregar al calendario", calApple: "Apple / iPhone", calTitle: "Boda de Ana Paula y Duncan",
     lede: "Nos casamos y queremos que estés ahí.",
     intro: "El 14 de agosto de 2027 celebraremos la unión de nuestras vidas en un lugar especial para nosotros y rodeados de las personas que más queremos. Significaría mucho tenerte con nosotros. Pronto te enviaremos la invitación formal; por ahora, solo cuéntanos si crees que podrás acompañarnos.",
-    formTitle: "¿Nos acompañas?",
+    formTitle: "¿Nos acompañas?", plusOne: "¡Puedes venir con tu acompañante!", guestsLabel: "Número de invitados", guestsHint: "Contándote a ti.",
     travelTitle: "Planifica tu viaje",
     travelIntro: "Sabemos que muchos vendrán de lejos, así que estamos preparando actividades antes y después de la boda para que el viaje valga la pena.",
     d1Title: "Noche de bienvenida", d1Text: "Una cena seguida de una pequeña fiesta para que todos los invitados se conozcan.",
@@ -506,7 +515,11 @@ addEventListener("scroll", onScroll, {passive:true}); onScroll();
 const form = document.getElementById("rsvpForm"), statusEl = document.getElementById("status");
 function setStatus(key, cls){ lastStatus = {key, cls}; statusEl.textContent = t(key); statusEl.className = "status " + (cls||""); }
 function esc(s){ return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
-function readForm(){ return { name: form.name.value.trim().slice(0,120), attending: form.attending.value, lang }; }
+function readForm(){
+  const attending = form.attending.value;
+  return { name: form.name.value.trim().slice(0,120), attending, guests: attending === "yes" ? Number(form.guests.value) : 0, lang };
+}
+form.addEventListener("change", () => { document.getElementById("guestsField").hidden = form.attending.value === "no"; });
 
 applyLang(saved || (prefersEs ? "es" : "en"));
 setInterval(tick, 60000);
@@ -522,7 +535,7 @@ form.addEventListener("submit", async e => {
   try {
     // text/plain avoids a CORS preflight, which Apps Script does not answer
     await fetch(WEDDING.rsvpUrl, { method: "POST", mode: "no-cors", headers: {"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify(data) });
-    form.reset();
+    form.reset(); document.getElementById("guestsField").hidden = false;
     setStatus(data.attending === "yes" ? "thanksYes" : "thanksNo", "ok");
   } catch(err){
     setStatus("failed", "err");
