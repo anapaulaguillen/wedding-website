@@ -24,7 +24,6 @@
   --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
   color-scheme:light;
   --on-photo:#fbfaf6;
-  --photo:url(photo.jpg);
   --body:"Manrope","Avenir Next","Segoe UI",system-ui,sans-serif;
 }
 
@@ -39,7 +38,7 @@ h1,h2,h3{font-family:var(--display);font-weight:500;text-wrap:balance;margin:0}
 .band.sage{--band:var(--sage-tint)}
 .band.with-art{isolation:isolate;overflow:hidden}
 .band.with-art > *{position:relative}
-.band .bg-cath{position:absolute;z-index:-1;left:50%;bottom:0;transform:translateX(-50%);height:calc(100% - 12px);width:auto;max-width:none;opacity:.2;pointer-events:none}
+.band .bg-cath{position:absolute;z-index:-1;left:50%;bottom:0;transform:translateX(-50%);height:min(calc(100% - 12px),380px);width:auto;max-width:none;opacity:.2;pointer-events:none}
 .bg-cath *{fill:var(--sage-tint);stroke:var(--olive);stroke-width:1.1}
 .bg-cath .dome,.bg-cath .lantern{fill:var(--linen)}
 .bg-cath .rib,.bg-cath .trim,.bg-cath .cross,.bg-cath .ground{fill:none}
@@ -56,21 +55,13 @@ h1,h2,h3{font-family:var(--display);font-weight:500;text-wrap:balance;margin:0}
 .hero{position:relative;margin-top:-72px;margin-bottom:56px;background:var(--card);outline:1px solid var(--line);outline-offset:-10px;border-radius:2px;box-shadow:var(--shadow);text-align:center;
   padding:52px 24px 44px;display:grid;gap:16px;justify-items:center}
 .cover{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;
-  height:clamp(480px,82svh,780px);
   margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));
-  background:var(--photo) center 38%/cover no-repeat;color:var(--on-photo);
-  padding:calc(88px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
-.cover::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(25,25,20,.45) 0%,rgba(25,25,20,0) 26%,rgba(25,25,20,0) 52%,rgba(25,25,20,.62) 86%);pointer-events:none}
-.cover .bottom{margin-top:auto;padding-bottom:104px;display:grid;justify-items:center}
-.cover > *{position:relative}
-@media (min-width:800px){
-  .cover{isolation:isolate;overflow:hidden;background:none}
-  .cover::before{z-index:-1;background:linear-gradient(180deg,rgba(25,25,20,.45) 0%,rgba(25,25,20,0) 26%,rgba(25,25,20,0) 52%,rgba(25,25,20,.62) 86%),var(--photo) center/auto 100% no-repeat}
-  .cover::after{content:"";position:absolute;inset:-40px;z-index:-2;background:var(--photo) center/cover no-repeat;filter:blur(28px) brightness(.8)}
-}
-.cover .tagline{color:var(--on-photo);font-family:var(--body);font-size:clamp(18px,4.6vw,26px);letter-spacing:.32em;text-transform:uppercase;font-weight:500;text-shadow:0 1px 14px rgba(0,0,0,.45)}
-.cover .names{color:var(--on-photo);font-family:var(--display);font-style:italic;font-weight:500;letter-spacing:-.01em;font-size:clamp(46px,12.5vw,96px);line-height:1.02;margin:0;text-shadow:0 2px 24px rgba(0,0,0,.4)}
-.cover .short{margin-top:14px;font-size:15px;font-weight:500;letter-spacing:.3em;color:var(--on-photo);text-shadow:0 1px 12px rgba(0,0,0,.45)}
+  background:radial-gradient(120% 90% at 50% 0%,#6f7b48 0%,var(--olive) 55%,#525c31 100%);color:var(--on-photo);
+  padding:calc(120px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 150px max(16px,env(safe-area-inset-left,0px))}
+.cover .bottom{display:grid;justify-items:center;margin-top:14px}
+.cover .tagline{color:var(--on-photo);font-family:var(--body);font-size:clamp(18px,4.6vw,26px);letter-spacing:.32em;text-transform:uppercase;font-weight:500;text-shadow:none}
+.cover .names{color:var(--on-photo);font-family:var(--display);font-style:italic;font-weight:500;letter-spacing:-.01em;font-size:clamp(46px,12.5vw,96px);line-height:1.02;margin:0;text-shadow:none}
+.cover .short{margin-top:14px;font-size:15px;font-weight:500;letter-spacing:.3em;color:var(--on-photo);text-shadow:none}
 .mono{width:132px;height:132px;color:var(--accent)}
 .mono text{font-family:var(--display);font-weight:400;fill:currentColor}
 .names{font-size:clamp(40px,9vw,64px);line-height:1.1;font-weight:400;color:var(--ink)}
@@ -171,7 +162,7 @@ th{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
 .lang button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--accent)}
 .topnav{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:calc(12px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 12px max(16px,env(safe-area-inset-left,0px));
-  color:var(--on-photo);text-shadow:0 1px 8px rgba(0,0,0,.35);transition:background-color .25s,box-shadow .25s,color .25s}
+  color:var(--on-photo);transition:background-color .25s,box-shadow .25s,color .25s}
 .topnav.solid,.topnav.open{background:rgba(255,255,255,.97);color:var(--ink);text-shadow:none;box-shadow:0 1px 0 var(--line)}
 .topnav .brand{margin-right:auto;font-family:var(--display);font-style:italic;font-weight:500;font-size:20px;color:inherit;text-decoration:none;white-space:nowrap}
 .navlinks{display:flex;align-items:center;gap:24px;margin-left:auto}
@@ -232,8 +223,18 @@ footer .valley{width:min(420px,100%);height:auto;overflow:visible}
 .tip{background:var(--linen);padding:20px 20px 22px;display:grid;gap:8px;align-content:start;border-top:3px solid var(--sage)}
 .tip h3{font-family:var(--body);font-weight:600;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--olive)}
 .tip p{font-size:15px;color:var(--ink)}
-.place .print{margin:0;background:#fff;padding:10px 10px 12px;box-shadow:var(--shadow);transform:rotate(-1.2deg)}
-.place .print img{display:block;width:100%;height:auto}
+.print{margin:0;background:#fff;padding:10px 10px 12px;box-shadow:var(--shadow);transform:rotate(-1.2deg)}
+.print img{display:block;width:100%;height:auto}
+.welcome-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:40px;align-items:center}
+.welcome .couple{transform:rotate(1.4deg)}
+.welcome-text{display:grid;gap:16px;text-align:left}
+.welcome-text p{margin:0}
+@media (min-width:621px){ .welcome .bg-cath{left:74%} }
+@media (max-width:620px){
+  .welcome-grid{grid-template-columns:1fr;gap:30px;justify-items:center}
+  .welcome .couple{width:min(320px,88%)}
+  .welcome-text{text-align:center;justify-items:center}
+}
 .place .info{display:grid;gap:10px;justify-items:center;text-align:center}
 .place .vname{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(26px,5vw,32px);color:var(--olive)}
 .place .info p{color:var(--muted);max-width:46ch}
@@ -262,7 +263,7 @@ footer .sig{font-family:var(--display);font-style:italic;font-weight:500;font-si
   <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navlinks"><i aria-hidden="true"></i><span data-t="menu">Menu</span></button>
 </nav>
 
-<header class="cover" id="top" role="img" aria-label="Ana Paula and Duncan in the Andes near Cuenca">
+<header class="cover" id="top">
   <div class="tagline" data-t="tagline">Save the Date</div>
   <div class="bottom">
     <h1 class="names"><span class="nw" data-k="name1">Ana Paula</span> <span class="nw">&amp; <span data-k="name2">Duncan</span></span></h1>
@@ -270,7 +271,7 @@ footer .sig{font-family:var(--display);font-style:italic;font-weight:500;font-si
   </div>
 </header>
 
-<div class="wrap" style="max-width:640px;padding-block:0">
+<div class="wrap" style="max-width:760px;padding-block:0">
   <div class="hero">
     <div class="caps" id="when">Saturday, August 14, 2027</div>
     <div class="dotrule" aria-hidden="true"><i></i></div>
@@ -287,7 +288,7 @@ footer .sig{font-family:var(--display);font-style:italic;font-weight:500;font-si
     </details>
   </div>
 
-  <section class="center band sage with-art">
+  <section class="band sage with-art welcome" id="welcome">
     <svg class="bg-cath" viewBox="0 -20 400 302" aria-hidden="true">
       <path class="stone" d="M104 150 V112 H152 V150 Z"/>
       <path class="hole" d="M113 140 V124.0 A4.0 4.0 0 0 1 121 124.0 V140 Z M124 140 V124.0 A4.0 4.0 0 0 1 132 124.0 V140 Z M135 140 V124.0 A4.0 4.0 0 0 1 143 124.0 V140 Z"/>
@@ -323,8 +324,13 @@ footer .sig{font-family:var(--display);font-style:italic;font-weight:500;font-si
       <path class="stone" d="M130 280 V257.0 A15.0 15.0 0 0 1 160 257.0 V280 Z M240 280 V257.0 A15.0 15.0 0 0 1 270 257.0 V280 Z"/><path class="hole" d="M135 280 V258.0 A10.0 10.0 0 0 1 155 258.0 V280 Z M245 280 V258.0 A10.0 10.0 0 0 1 265 258.0 V280 Z"/>
       <path class="ground" d="M20 280 H380"/>
     </svg>
+    <div class="welcome-grid">
+      <figure class="print couple"><img id="couplePhoto" src="photo.jpg" loading="lazy" width="1400" height="1867" alt="Ana Paula and Duncan in the Andes near Cuenca" data-ta="coupleAlt"></figure>
+      <div class="welcome-text">
     <p class="lede" data-t="lede">We are getting married, and we want you there!</p>
     <p data-t="intro">The formal invitation will follow soon; for now, just let us know if you think you can make it.</p>
+      </div>
+    </div>
   </section>
 
   <section id="venue" class="place">
@@ -423,7 +429,7 @@ const T = {
     hotelsH: "Hotels", hotelsT: "We're negotiating the best rates we can at hotels in Cuenca and will share them with you soon.",
     galT: "Thinking of adding a trip to the Galápagos? We'll find a good travel agent to help you arrange it.", venueTitle: "The venue", mapLink: "Open in Google Maps",
     venueText: "A mountain lodge between two waterfalls at the edge of Cajas National Park at 3,435 m (11,270 ft), about 30 minutes from Cuenca.",
-    venueAlt: "Hostería Dos Chorreras, a mountain lodge beside a lake in the Cajas highlands", nameLabel: "Your name", emailLabel: "Email", emailHint: "So we can send you the formal invitation.", needEmail: "Please add a valid email address.",
+    coupleAlt: "Ana Paula and Duncan in the Andes near Cuenca", venueAlt: "Hostería Dos Chorreras, a mountain lodge beside a lake in the Cajas highlands", nameLabel: "Your name", emailLabel: "Email", emailHint: "So we can send you the formal invitation.", needEmail: "Please add a valid email address.",
     yes: "Yes, I'll be there", no: "Sorry, I can't make it", send: "Send reply", update: "Update reply",
     days: "days", hours: "hours", countdown: "Countdown to the wedding",
     needName: "Please add your name.", needChoice: "Please choose yes or no.",
@@ -452,7 +458,7 @@ const T = {
     hotelsH: "Hoteles", hotelsT: "Estamos negociando las mejores tarifas en hoteles de Cuenca y pronto te pasaremos la información.",
     galT: "¿Quieres aprovechar el viaje para conocer Galápagos? Buscaremos una buena agencia de viajes que te ayude con todo.", venueTitle: "El lugar", mapLink: "Abrir en Google Maps",
     venueText: "Una hostería de montaña entre dos cascadas, al borde del Parque Nacional Cajas a 3.435 m de altura, a unos 30 minutos de Cuenca.",
-    venueAlt: "Hostería Dos Chorreras, una hostería de montaña junto a una laguna en el Cajas", nameLabel: "Tu nombre", emailLabel: "Correo electrónico", emailHint: "Para enviarte la invitación formal.", needEmail: "Por favor, escribe un correo válido.",
+    coupleAlt: "Ana Paula y Duncan en los Andes, cerca de Cuenca", venueAlt: "Hostería Dos Chorreras, una hostería de montaña junto a una laguna en el Cajas", nameLabel: "Tu nombre", emailLabel: "Correo electrónico", emailHint: "Para enviarte la invitación formal.", needEmail: "Por favor, escribe un correo válido.",
     yes: "Sí, ahí estaré", no: "Qué pena, no podré ir", send: "Enviar respuesta", update: "Actualizar respuesta",
     days: "días", hours: "horas", countdown: "Cuenta regresiva para la boda",
     needName: "Por favor, escribe tu nombre.", needChoice: "Por favor, escoge sí o no.",
