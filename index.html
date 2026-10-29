@@ -32,12 +32,13 @@ h1,h2,h3{font-family:var(--display);font-weight:500;text-wrap:balance;margin:0}
 .band.sage{--band:var(--sage-tint)}
 .band.with-art{isolation:isolate;overflow:hidden}
 .band.with-art > *{position:relative}
-.band .bg-cath{position:absolute;z-index:-1;left:50%;bottom:0;transform:translateX(-50%);height:calc(100% - 18px);width:auto;max-width:none;opacity:.28;pointer-events:none}
-.bg-cath .brick,.bg-cath .stone,.bg-cath .hole,.bg-cath .tree{fill:none;stroke:var(--olive);stroke-width:1.1}
-.bg-cath .dome{fill:var(--linen);stroke:var(--olive);stroke-width:1.1}
-.bg-cath .rib{fill:none;stroke:var(--olive);stroke-width:.8}
-.bg-cath .gold{fill:var(--olive);stroke:none}
-.bg-cath .ground{fill:none;stroke:var(--olive);stroke-width:1.2}
+.band .bg-cath{position:absolute;z-index:-1;left:50%;bottom:0;transform:translateX(-50%);height:calc(100% - 12px);width:auto;max-width:none;opacity:.2;pointer-events:none}
+.bg-cath *{fill:var(--sage-tint);stroke:var(--olive);stroke-width:1.1}
+.bg-cath .dome,.bg-cath .lantern{fill:var(--linen)}
+.bg-cath .rib,.bg-cath .trim,.bg-cath .cross,.bg-cath .ground{fill:none}
+.bg-cath .rib,.bg-cath .trim{stroke-width:.8}
+.with-art p{text-shadow:0 0 4px var(--sage-tint),0 0 10px var(--sage-tint),0 0 18px var(--sage-tint)}
+.with-art p:not(.lede){color:var(--ink);font-weight:400}
 .band.beige{--band:var(--beige)}
 
 .center{text-align:center;justify-items:center}
@@ -218,47 +219,40 @@ footer .sig{font-family:var(--display);font-style:italic;font-weight:500;font-si
   </div>
 
   <section class="center band sage with-art">
-    <svg class="bg-cath" viewBox="0 0 400 300" aria-hidden="true">
-      <!-- trees -->
-      <path class="tree" d="M22 262 C10 250 12 228 28 222 C30 206 50 202 58 214 C72 210 80 228 70 240 C78 252 66 264 52 262 Z"/>
-      <path class="tree" d="M378 262 C390 250 388 228 372 222 C370 206 350 202 342 214 C328 210 320 228 330 240 C322 252 334 264 348 262 Z"/>
-      <!-- side domes on drums -->
-      <rect class="stone" x="84" y="118" width="42" height="26"/>
-      <path class="dome" d="M82 118 A23 30 0 0 1 128 118 Z"/>
-      <path class="rib" d="M105 88 Q92 100 90 118 M105 88 Q100 102 99 118 M105 88 Q110 102 111 118 M105 88 Q118 100 120 118"/>
-      <rect class="gold" x="102" y="80" width="6" height="8"/>
-      <rect class="stone" x="274" y="118" width="42" height="26"/>
-      <path class="dome" d="M272 118 A23 30 0 0 1 318 118 Z"/>
-      <path class="rib" d="M295 88 Q282 100 280 118 M295 88 Q290 102 289 118 M295 88 Q300 102 301 118 M295 88 Q308 100 310 118"/>
-      <rect class="gold" x="292" y="80" width="6" height="8"/>
-      <!-- central drum, dome, lantern, cross -->
-      <rect class="stone" x="150" y="98" width="100" height="46"/>
-      <path class="hole" d="M162 140 V118 A6 6 0 0 1 174 118 V140 Z M184 140 V118 A6 6 0 0 1 196 118 V140 Z M204 140 V118 A6 6 0 0 1 216 118 V140 Z M226 140 V118 A6 6 0 0 1 238 118 V140 Z"/>
-      <rect class="stone" x="144" y="92" width="112" height="8"/>
-      <path class="dome" d="M146 92 A54 62 0 0 1 254 92 Z"/>
-      <path class="rib" d="M200 30 Q166 50 158 92 M200 30 Q180 56 176 92 M200 30 Q196 60 194 92 M200 30 Q204 60 206 92 M200 30 Q220 56 224 92 M200 30 Q234 50 242 92"/>
-      <path class="rib" d="M150 76 Q200 64 250 76" />
-      <rect class="stone" x="192" y="18" width="16" height="14"/>
-      <path class="dome" d="M190 18 A10 9 0 0 1 210 18 Z"/>
-      <path class="gold" d="M199 0 H201 V4 H205 V6 H201 V10 H199 V6 H195 V4 H199 Z"/>
-      <!-- towers -->
-      <rect class="brick" x="58" y="150" width="70" height="112"/>
-      <rect class="brick" x="272" y="150" width="70" height="112"/>
-      <rect class="stone" x="54" y="144" width="78" height="8"/>
-      <rect class="stone" x="268" y="144" width="78" height="8"/>
-      <path class="hole" d="M76 196 V172 A7 7 0 0 1 90 172 V196 Z M96 196 V172 A7 7 0 0 1 110 172 V196 Z M290 196 V172 A7 7 0 0 1 304 172 V196 Z M310 196 V172 A7 7 0 0 1 324 172 V196 Z"/>
-      <path class="hole" d="M84 244 V222 A9 9 0 0 1 102 222 V244 Z M298 244 V222 A9 9 0 0 1 316 222 V244 Z"/>
-      <!-- central facade with gable, rose window and portal -->
-      <rect class="brick" x="128" y="160" width="144" height="102"/>
-      <path class="stone" d="M122 162 L200 128 L278 162 Z"/>
-      <circle class="stone" cx="200" cy="186" r="17"/>
-      <circle class="hole" cx="200" cy="186" r="11"/>
-      <path class="rib" d="M200 175 V197 M189 186 H211 M192 178 L208 194 M208 178 L192 194"/>
-      <path class="stone" d="M174 262 V230 A26 26 0 0 1 226 230 V262 Z"/>
-      <path class="hole" d="M182 262 V232 A18 18 0 0 1 218 232 V262 Z"/>
-      <path class="hole" d="M140 250 V226 A7 7 0 0 1 154 226 V250 Z M246 250 V226 A7 7 0 0 1 260 226 V250 Z"/>
-      <!-- ground -->
-      <path class="ground" d="M0 262 H400"/>
+    <svg class="bg-cath" viewBox="0 -20 400 302" aria-hidden="true">
+      <path class="stone" d="M104 150 V112 H152 V150 Z"/>
+      <path class="hole" d="M113 140 V124.0 A4.0 4.0 0 0 1 121 124.0 V140 Z M124 140 V124.0 A4.0 4.0 0 0 1 132 124.0 V140 Z M135 140 V124.0 A4.0 4.0 0 0 1 143 124.0 V140 Z"/>
+      <path class="stone" d="M101 112 H155 V106 H101 Z"/>
+      <path class="dome" d="M103.0 106 C103.0 77.48 113.0 60 128 60 C143.0 60 153.0 77.48 153.0 106 Z"/><path class="rib" d="M128 61 Q107.2 80.7 111.3 106 M128 61 Q117.6 80.7 119.7 106 M128 61 Q128.0 80.7 128.0 106 M128 61 Q138.4 80.7 136.3 106 M128 61 Q148.8 80.7 144.7 106 M105.0 97.7 Q128 95.0 151.0 97.7"/>
+      <path class="stone" d="M124 61 V54.6 H132 V61 Z"/><path class="lantern" d="M123.4 54.6 A4.6 4.4 0 0 1 132.6 54.6 Z"/><path class="cross" d="M128 50.2 V43.8 M125.8 46.2 H130.2"/>
+      <path class="stone" d="M248 150 V112 H296 V150 Z"/>
+      <path class="hole" d="M257 140 V124.0 A4.0 4.0 0 0 1 265 124.0 V140 Z M268 140 V124.0 A4.0 4.0 0 0 1 276 124.0 V140 Z M279 140 V124.0 A4.0 4.0 0 0 1 287 124.0 V140 Z"/>
+      <path class="stone" d="M245 112 H299 V106 H245 Z"/>
+      <path class="dome" d="M247.0 106 C247.0 77.48 257.0 60 272 60 C287.0 60 297.0 77.48 297.0 106 Z"/><path class="rib" d="M272 61 Q251.2 80.7 255.3 106 M272 61 Q261.6 80.7 263.7 106 M272 61 Q272.0 80.7 272.0 106 M272 61 Q282.4 80.7 280.3 106 M272 61 Q292.8 80.7 288.7 106 M249.0 97.7 Q272 95.0 295.0 97.7"/>
+      <path class="stone" d="M268 61 V54.6 H276 V61 Z"/><path class="lantern" d="M267.4 54.6 A4.6 4.4 0 0 1 276.6 54.6 Z"/><path class="cross" d="M272 50.2 V43.8 M269.8 46.2 H274.2"/>
+      <path class="stone" d="M150 160 V82 H250 V160 Z"/>
+      <path class="hole" d="M158 124 V101.0 A5.0 5.0 0 0 1 168 101.0 V124 Z M176 124 V101.0 A5.0 5.0 0 0 1 186 101.0 V124 Z M195 124 V101.0 A5.0 5.0 0 0 1 205 101.0 V124 Z M214 124 V101.0 A5.0 5.0 0 0 1 224 101.0 V124 Z M232 124 V101.0 A5.0 5.0 0 0 1 242 101.0 V124 Z"/>
+      <path class="trim" d="M150 96 H250 M150 130 H250"/>
+      <path class="stone" d="M146 82 H254 V75 H146 Z"/>
+      <path class="dome" d="M148.0 75 C148.0 34.08 168.8 9 200 9 C231.2 9 252.0 34.08 252.0 75 Z"/><path class="rib" d="M200 10 Q151.2 38.7 161.0 75 M200 10 Q167.5 38.7 174.0 75 M200 10 Q183.8 38.7 187.0 75 M200 10 Q200.0 38.7 200.0 75 M200 10 Q216.2 38.7 213.0 75 M200 10 Q232.5 38.7 226.0 75 M200 10 Q248.8 38.7 239.0 75 M150.0 63.1 Q200 59.2 250.0 63.1"/>
+      <path class="stone" d="M194 9 V-0.6000000000000014 H206 V9 Z"/><path class="lantern" d="M193.1 -0.6000000000000014 A6.8999999999999995 6.6000000000000005 0 0 1 206.9 -0.6000000000000014 Z"/><path class="cross" d="M200 -7.200000000000003 V-16.799999999999997 M196.7 -13.200000000000003 H203.3"/>
+      <path class="brick" d="M58 280 V128 H116 V280 Z"/>
+      <path class="stone" d="M54 128 H120 V120 H54 Z M56 120 V112 H118 V120"/>
+      <path class="trim" d="M58 182 H116 M58 236 H116 M60 112 V120 M72 112 V120 M87 112 V120 M102 112 V120 M114 112 V120"/>
+      <path class="hole" d="M70 170 V145.0 A7.0 7.0 0 0 1 84 145.0 V170 Z M90 170 V145.0 A7.0 7.0 0 0 1 104 145.0 V170 Z M78 226 V205.0 A9.0 9.0 0 0 1 96 205.0 V226 Z M80 272 V257.0 A7.0 7.0 0 0 1 94 257.0 V272 Z"/>
+      <path class="brick" d="M284 280 V128 H342 V280 Z"/>
+      <path class="stone" d="M280 128 H346 V120 H280 Z M282 120 V112 H344 V120"/>
+      <path class="trim" d="M284 182 H342 M284 236 H342 M286 112 V120 M298 112 V120 M313 112 V120 M328 112 V120 M340 112 V120"/>
+      <path class="hole" d="M296 170 V145.0 A7.0 7.0 0 0 1 310 145.0 V170 Z M316 170 V145.0 A7.0 7.0 0 0 1 330 145.0 V170 Z M304 226 V205.0 A9.0 9.0 0 0 1 322 205.0 V226 Z M306 272 V257.0 A7.0 7.0 0 0 1 320 257.0 V272 Z"/>
+      <path class="brick" d="M116 280 V150 L200 120 L284 150 V280 Z"/>
+      <path class="trim" d="M116 150 L200 120 L284 150 M116 156 H284"/>
+      <circle class="stone" cx="200" cy="176" r="20"/><circle class="hole" cx="200" cy="176" r="13"/>
+      <path class="trim" d="M200 176 L213.0 176.0 M200 176 L211.3 182.5 M200 176 L206.5 187.3 M200 176 L200.0 189.0 M200 176 L193.5 187.3 M200 176 L188.7 182.5 M200 176 L187.0 176.0 M200 176 L188.7 169.5 M200 176 L193.5 164.7 M200 176 L200.0 163.0 M200 176 L206.5 164.7 M200 176 L211.3 169.5"/><circle class="stone" cx="200" cy="176" r="3"/>
+      <path class="trim" d="M124 204 H276 M124 220 H276"/>
+      <path class="hole" d="M128 220 V210.5 A4.5 4.5 0 0 1 137 210.5 V220 Z M140 220 V210.5 A4.5 4.5 0 0 1 149 210.5 V220 Z M152 220 V210.5 A4.5 4.5 0 0 1 161 210.5 V220 Z M164 220 V210.5 A4.5 4.5 0 0 1 173 210.5 V220 Z M176 220 V210.5 A4.5 4.5 0 0 1 185 210.5 V220 Z M188 220 V210.5 A4.5 4.5 0 0 1 197 210.5 V220 Z M200 220 V210.5 A4.5 4.5 0 0 1 209 210.5 V220 Z M212 220 V210.5 A4.5 4.5 0 0 1 221 210.5 V220 Z M224 220 V210.5 A4.5 4.5 0 0 1 233 210.5 V220 Z M236 220 V210.5 A4.5 4.5 0 0 1 245 210.5 V220 Z M248 220 V210.5 A4.5 4.5 0 0 1 257 210.5 V220 Z M260 220 V210.5 A4.5 4.5 0 0 1 269 210.5 V220 Z"/>
+      <path class="stone" d="M174 280 V254.0 A26.0 26.0 0 0 1 226 254.0 V280 Z"/><path class="hole" d="M181 280 V255.0 A19.0 19.0 0 0 1 219 255.0 V280 Z"/>
+      <path class="stone" d="M130 280 V257.0 A15.0 15.0 0 0 1 160 257.0 V280 Z M240 280 V257.0 A15.0 15.0 0 0 1 270 257.0 V280 Z"/><path class="hole" d="M135 280 V258.0 A10.0 10.0 0 0 1 155 258.0 V280 Z M245 280 V258.0 A10.0 10.0 0 0 1 265 258.0 V280 Z"/>
+      <path class="ground" d="M20 280 H380"/>
     </svg>
     <p class="lede" data-t="lede">We’re getting married, and we want you there.</p>
     <p data-t="intro">On August 14, 2027, we’ll say “I do” in Cuenca, Ecuador, surrounded by the mountains and the people we love most. It would mean so much to have you with us. The formal invitation will follow soon; for now, just let us know if you think you can make it.</p>
