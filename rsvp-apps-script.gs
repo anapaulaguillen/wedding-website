@@ -1,8 +1,8 @@
 // Paste this into your Google Sheet: Extensions > Apps Script.
-// Then Deploy > New deployment > Web app (Execute as: Me, Who has access: Anyone).
+// Then Deploy > Manage deployments > edit > Version: New version (keeps the same link).
 // Each reply from the save-the-date site is added as a new row.
 
-const HEADERS = ["Received", "Name", "Coming", "Guests", "Language"];
+const HEADERS = ["Received", "Name", "Email", "Coming", "Guests", "Language"];
 
 function doPost(e) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
@@ -11,6 +11,6 @@ function doPost(e) {
   const clean = v => String(v || "").slice(0, 200).replace(/^[=+\-@]/, "'$&"); // stop formulas being injected
   const coming = d.attending === "yes";
   const guests = coming ? Math.min(Math.max(Number(d.guests) || 1, 1), 10) : 0;
-  sheet.appendRow([new Date(), clean(d.name), coming ? "Yes" : "No", guests, d.lang === "es" ? "Español" : "English"]);
+  sheet.appendRow([new Date(), clean(d.name), clean(d.email), coming ? "Yes" : "No", guests, d.lang === "es" ? "Español" : "English"]);
   return ContentService.createTextOutput("ok");
 }

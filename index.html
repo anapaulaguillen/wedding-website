@@ -358,6 +358,7 @@ footer .sig{font-family:var(--display);font-style:italic;font-weight:500;font-si
     <p class="plus-one" data-t="plusOne">Plus-ones are welcome!</p>
     <form id="rsvpForm" novalidate>
       <div class="field"><label for="f-name" data-t="nameLabel">Your name</label><input id="f-name" name="name" autocomplete="name" required></div>
+      <div class="field"><label for="f-email" data-t="emailLabel">Email</label><input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required><span class="hint" data-t="emailHint">So we can send you the formal invitation.</span></div>
       <div class="field">
         <span class="legend" id="lg-attend"></span>
         <div class="choice" role="radiogroup" aria-labelledby="lg-attend">
@@ -383,7 +384,7 @@ footer .sig{font-family:var(--display);font-style:italic;font-weight:500;font-si
     <p class="note" style="text-align:center;margin-inline:auto">Only you can see this list.</p>
     <div class="guestlist">
       <div class="tally" id="tally"></div>
-      <div class="tablewrap"><table><thead><tr><th>Name</th><th>Reply</th><th>Guests</th><th>Language</th><th>Received</th></tr></thead><tbody id="guestRows"></tbody></table></div>
+      <div class="tablewrap"><table><thead><tr><th>Name</th><th>Email</th><th>Reply</th><th>Guests</th><th>Language</th><th>Received</th></tr></thead><tbody id="guestRows"></tbody></table></div>
       <p class="note" id="noReplies">No replies yet. They'll appear here as people answer.</p>
     </div>
   </section>
@@ -419,7 +420,7 @@ const T = {
     hotelsH: "Hotels", hotelsT: "We're negotiating the best rates we can at hotels in Cuenca and will share them with you soon.",
     galT: "Thinking of adding a trip to the Galápagos? We'll find a good travel agent to help you arrange it.", venueTitle: "The venue", mapLink: "Open in Google Maps",
     venueText: "A mountain lodge between two waterfalls at the edge of Cajas National Park at 3,435 m (11,270 ft), about 30 minutes from Cuenca.",
-    venueAlt: "Hostería Dos Chorreras, a mountain lodge beside a lake in the Cajas highlands", nameLabel: "Your name",
+    venueAlt: "Hostería Dos Chorreras, a mountain lodge beside a lake in the Cajas highlands", nameLabel: "Your name", emailLabel: "Email", emailHint: "So we can send you the formal invitation.", needEmail: "Please add a valid email address.",
     yes: "Yes, I'll be there", no: "Sorry, I can't make it", send: "Send reply", update: "Update reply",
     days: "days", hours: "hours", countdown: "Countdown to the wedding",
     needName: "Please add your name.", needChoice: "Please choose yes or no.",
@@ -448,7 +449,7 @@ const T = {
     hotelsH: "Hoteles", hotelsT: "Estamos negociando las mejores tarifas en hoteles de Cuenca y pronto te pasaremos la información.",
     galT: "¿Quieres aprovechar el viaje para conocer Galápagos? Buscaremos una buena agencia de viajes que te ayude con todo.", venueTitle: "El lugar", mapLink: "Abrir en Google Maps",
     venueText: "Una hostería de montaña entre dos cascadas, al borde del Parque Nacional Cajas a 3.435 m de altura, a unos 30 minutos de Cuenca.",
-    venueAlt: "Hostería Dos Chorreras, una hostería de montaña junto a una laguna en el Cajas", nameLabel: "Tu nombre",
+    venueAlt: "Hostería Dos Chorreras, una hostería de montaña junto a una laguna en el Cajas", nameLabel: "Tu nombre", emailLabel: "Correo electrónico", emailHint: "Para enviarte la invitación formal.", needEmail: "Por favor, escribe un correo válido.",
     yes: "Sí, ahí estaré", no: "Qué pena, no podré ir", send: "Enviar respuesta", update: "Actualizar respuesta",
     days: "días", hours: "horas", countdown: "Cuenta regresiva para la boda",
     needName: "Por favor, escribe tu nombre.", needChoice: "Por favor, escoge sí o no.",
@@ -524,7 +525,7 @@ function setStatus(key, cls){ lastStatus = {key, cls}; statusEl.textContent = t(
 function esc(s){ return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 function readForm(){
   const attending = form.attending.value;
-  return { name: form.name.value.trim().slice(0,120), attending, guests: attending === "yes" ? Number(form.guests.value) : 0, lang };
+  return { name: form.name.value.trim().slice(0,120), email: form.email.value.trim().slice(0,160), attending, guests: attending === "yes" ? Number(form.guests.value) : 0, lang };
 }
 form.addEventListener("change", () => { document.getElementById("guestsField").hidden = form.attending.value === "no"; });
 
@@ -536,6 +537,7 @@ form.addEventListener("submit", async e => {
   e.preventDefault();
   const data = readForm();
   if(!data.name){ setStatus("needName", "err"); form.name.focus(); return; }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){ setStatus("needEmail", "err"); form.email.focus(); return; }
   if(!data.attending){ setStatus("needChoice", "err"); return; }
   if(!WEDDING.rsvpUrl){ setStatus("notSetUp", "err"); return; }
   const btn = document.getElementById("submitBtn"); btn.disabled = true; setStatus("sending");
