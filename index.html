@@ -45,9 +45,6 @@ h1,h2,h3{font-family:var(--display);font-weight:500;text-wrap:balance;margin:0}
 .center p{margin-inline:auto}
 .lede{font-family:var(--display);font-size:clamp(26px,6vw,34px);line-height:1.25;font-style:italic;color:var(--olive)}
 
-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
-nav a{color:var(--muted);text-decoration:none;font-weight:400}
-nav a:hover{color:var(--accent)}
 
 .hero{position:relative;margin-top:-72px;margin-bottom:56px;background:var(--card);outline:1px solid var(--line);outline-offset:-10px;border-radius:2px;box-shadow:var(--shadow);text-align:center;
   padding:52px 24px 44px;display:grid;gap:16px;justify-items:center}
@@ -55,7 +52,7 @@ nav a:hover{color:var(--accent)}
   height:clamp(480px,82svh,780px);
   margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));
   background:var(--photo) center 38%/cover no-repeat;color:var(--on-photo);
-  padding:calc(64px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+  padding:calc(88px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
 .cover::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(25,25,20,.5) 0%,rgba(25,25,20,.12) 42%,rgba(25,25,20,0) 60%);pointer-events:none}
 .cover > *{position:relative}
 @media (min-width:800px){
@@ -63,9 +60,6 @@ nav a:hover{color:var(--accent)}
   .cover::before{z-index:-1;background:linear-gradient(180deg,rgba(25,25,20,.5) 0%,rgba(25,25,20,.12) 42%,rgba(25,25,20,0) 60%),var(--photo) center/auto 100% no-repeat}
   .cover::after{content:"";position:absolute;inset:-40px;z-index:-2;background:var(--photo) center/cover no-repeat;filter:blur(28px) brightness(.8)}
 }
-.cover .lang{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));color:var(--on-photo)}
-.cover .lang button{color:var(--on-photo);opacity:.8}
-.cover .lang button[aria-pressed="true"]{opacity:1;color:var(--on-photo);border-bottom-color:var(--on-photo)}
 .cover .tagline{color:var(--on-photo);font-family:var(--body);font-size:clamp(18px,4.6vw,26px);letter-spacing:.32em;text-transform:uppercase;font-weight:500;text-shadow:0 1px 14px rgba(0,0,0,.45)}
 .cover .names{color:var(--on-photo);font-family:var(--display);font-style:italic;font-weight:500;letter-spacing:-.01em;font-size:clamp(46px,12.5vw,104px);line-height:1.02;margin-top:10px;text-shadow:0 2px 24px rgba(0,0,0,.25)}
 .cover .short{margin-top:14px;font-size:15px;font-weight:500;letter-spacing:.3em;color:var(--on-photo);text-shadow:0 1px 12px rgba(0,0,0,.45)}
@@ -101,7 +95,9 @@ details.cal summary::after,details.cal[open] summary::after{content:none}
 .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
 
 section{display:grid;gap:18px}
-section{scroll-margin-top:24px}
+section{scroll-margin-top:64px}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 section > h2{font-size:clamp(30px,5.4vw,40px);font-weight:500;font-style:italic;color:var(--burgundy);text-align:center;display:grid;justify-items:center;gap:10px;margin-bottom:6px}
 
 p{margin:0;max-width:62ch}
@@ -162,6 +158,30 @@ th{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
 .lang{display:flex;justify-content:flex-end;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
 .lang button{font:inherit;letter-spacing:inherit;text-transform:inherit;background:none;border:0;padding:4px 0;color:var(--muted);cursor:pointer;border-bottom:1px solid transparent}
 .lang button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.topnav{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:calc(12px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 12px max(16px,env(safe-area-inset-left,0px));
+  color:var(--on-photo);text-shadow:0 1px 8px rgba(0,0,0,.35);transition:background-color .25s,box-shadow .25s,color .25s}
+.topnav.solid,.topnav.open{background:rgba(255,255,255,.97);color:var(--ink);text-shadow:none;box-shadow:0 1px 0 var(--line)}
+.topnav .brand{font-family:var(--display);font-style:italic;font-weight:500;font-size:20px;color:inherit;text-decoration:none;white-space:nowrap}
+.navlinks{display:flex;align-items:center;gap:24px}
+.navlinks > a{color:inherit;text-decoration:none;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;padding:6px 0;border-bottom:1px solid transparent}
+.navlinks > a:hover{border-bottom-color:currentColor}
+.topnav .lang{color:inherit;gap:8px}
+.topnav .lang button{color:inherit;opacity:.7;font-weight:500}
+.topnav .lang button[aria-pressed="true"]{opacity:1;color:inherit;border-bottom-color:currentColor}
+.menu-btn{display:none;align-items:center;gap:8px;background:none;border:1px solid currentColor;color:inherit;cursor:pointer;
+  font:500 11px/1 var(--body);letter-spacing:.18em;text-transform:uppercase;padding:9px 12px}
+.menu-btn i{display:grid;gap:3px;width:14px}
+.menu-btn i::before,.menu-btn i::after{content:"";height:1.5px;background:currentColor}
+@media (max-width:760px){
+  .menu-btn{display:inline-flex}
+  .navlinks{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--linen);color:var(--ink);
+    box-shadow:var(--shadow);padding:4px max(16px,env(safe-area-inset-right,0px)) 18px max(16px,env(safe-area-inset-left,0px))}
+  .topnav.open .navlinks{display:flex}
+  .navlinks > a{padding:15px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .navlinks > a:hover{border-bottom-color:var(--line);color:var(--burgundy)}
+  .navlinks .lang{justify-content:flex-start;padding-top:14px}
+}
 footer{text-align:center;color:var(--muted);display:grid;gap:10px;justify-items:center;padding-top:56px}
 footer .valley{width:min(420px,100%);height:auto;overflow:visible}
 .valley .peak{fill:var(--sage-tint);stroke:var(--olive);stroke-width:1.2}
@@ -210,10 +230,21 @@ footer .sig{font-family:var(--display);font-style:italic;font-weight:500;font-si
 <body>
 
 
-<header class="cover" role="img" aria-label="Ana Paula and Duncan in the Andes near Cuenca">
-  <div class="lang" role="group" aria-label="Language / Idioma">
-    <button type="button" id="lang-en" data-lang="en" aria-pressed="true">English</button><span aria-hidden="true">·</span><button type="button" id="lang-es" data-lang="es" aria-pressed="false">Español</button>
+<nav class="topnav" id="topnav" aria-label="Menu">
+  <a class="brand" href="#top">Ana Paula &amp; Duncan</a>
+  <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navlinks"><i aria-hidden="true"></i><span data-t="menu">Menu</span></button>
+  <div class="navlinks" id="navlinks">
+    <a href="#top" data-t="navHome">Home</a>
+    <a href="#venue" data-t="navVenue">The venue</a>
+    <a href="#travel" data-t="navTravel">Travel</a>
+    <a href="#rsvp" data-t="navRsvp">RSVP</a>
+    <div class="lang" role="group" aria-label="Language / Idioma">
+      <button type="button" id="lang-en" data-lang="en" aria-pressed="true">English</button><span aria-hidden="true">·</span><button type="button" id="lang-es" data-lang="es" aria-pressed="false">Español</button>
+    </div>
   </div>
+</nav>
+
+<header class="cover" id="top" role="img" aria-label="Ana Paula and Duncan in the Andes near Cuenca">
   <div class="tagline" data-t="tagline">Save the Date</div>
   <h1 class="names"><span class="nw" data-k="name1">Ana Paula</span> <span class="nw">&amp; <span data-k="name2">Duncan</span></span></h1>
   <div class="caps short">14 · 08 · 2027</div>
@@ -349,7 +380,7 @@ const wDate = new Date(WEDDING.date);
 
 const T = {
   en: {
-    locale: "en-US", tagline: "Save the Date", calBtn: "Add to calendar", calApple: "Apple / iPhone", calTitle: "Ana Paula & Duncan’s wedding",
+    locale: "en-US", tagline: "Save the Date", menu: "Menu", navHome: "Home", navVenue: "The venue", navTravel: "Travel", navRsvp: "RSVP", calBtn: "Add to calendar", calApple: "Apple / iPhone", calTitle: "Ana Paula & Duncan’s wedding",
     lede: "We’re getting married, and we want you there.",
     intro: "On August 14, 2027, we’ll say “I do” in Cuenca, Ecuador, surrounded by the mountains and the people we love most. It would mean so much to have you with us. The formal invitation will follow soon; for now, just let us know if you think you can make it.",
     formTitle: "Will you be there?",
@@ -378,7 +409,7 @@ const T = {
     signInNote: "Replying here needs you to be signed in to view this page. If the button doesn't work for you, just message us your answer."
   },
   es: {
-    locale: "es-EC", tagline: "Save the Date", calBtn: "Agregar al calendario", calApple: "Apple / iPhone", calTitle: "Boda de Ana Paula y Duncan",
+    locale: "es-EC", tagline: "Save the Date", menu: "Menú", navHome: "Inicio", navVenue: "El lugar", navTravel: "Viaje", navRsvp: "Confirmar", calBtn: "Agregar al calendario", calApple: "Apple / iPhone", calTitle: "Boda de Ana Paula y Duncan",
     lede: "Nos casamos y queremos que estés ahí.",
     intro: "El 14 de agosto de 2027 celebraremos la unión de nuestras vidas en un lugar especial para nosotros y rodeados de las personas que más queremos. Significaría mucho tenerte con nosotros. Pronto te enviaremos la invitación formal; por ahora, solo cuéntanos si crees que podrás acompañarnos.",
     formTitle: "¿Nos acompañas?",
@@ -455,6 +486,14 @@ document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click
 let saved = null;
 try { saved = localStorage.getItem("lang"); } catch(_){}
 const prefersEs = (navigator.languages || [navigator.language || ""]).some(x => /^es\b/i.test(x));
+
+// Top menu: solid once past the photo, collapsible on phones
+const topnav = document.getElementById("topnav"), menuBtn = document.getElementById("menuBtn");
+function setMenu(open){ topnav.classList.toggle("open", open); menuBtn.setAttribute("aria-expanded", String(open)); }
+menuBtn.addEventListener("click", () => setMenu(!topnav.classList.contains("open")));
+document.querySelectorAll(".navlinks > a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+function onScroll(){ topnav.classList.toggle("solid", scrollY > document.getElementById("top").offsetHeight - 80); }
+addEventListener("scroll", onScroll, {passive:true}); onScroll();
 
 // Reply form
 const form = document.getElementById("rsvpForm"), statusEl = document.getElementById("status");
